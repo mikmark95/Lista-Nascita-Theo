@@ -16,9 +16,9 @@ export const firebaseConfig = {
 export const siteSettings = {
   title: "Aspettando il nostro piccolo amore",
   intro: "Scegliete un regalo dalla lista, aprite il link del negozio e prenotatelo per evitare doppioni.",
-  familyName: "Mamma e Papà",
+  familyName: "Nicoleta e Michele",
   // Numero con prefisso internazionale, senza + e senza spazi. Esempio: 393331234567
-  whatsappNumber: "393331234567"
+  whatsappNumber: "3927571480"
 };
 
 export function isFirebaseConfigured() {
