@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin - Lista Nascita</title>
+  <meta name="robots" content="noindex" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="admin-page">
+  <header class="admin-header">
+    <nav class="nav">
+      <a class="brand" href="./">Lista Nascita</a>
+      <div class="nav-links">
+        <a href="index.html">Sito pubblico</a>
+      </div>
+    </nav>
+    <section class="admin-title">
+      <p class="eyebrow">Area riservata</p>
+      <h1>Gestione regali</h1>
+      <p>Aggiungi, modifica, elimina e libera i regali prenotati.</p>
+    </section>
+  </header>
+
+  <main class="admin-main">
+    <section id="setupWarning" class="alert hidden">
+      Configura Firebase nel file <strong>firebase-config.js</strong> prima di usare il pannello admin.
+    </section>
+
+    <section class="admin-login panel">
+      <div>
+        <h2>Accesso admin</h2>
+        <p id="loginStatus">Accedi con Google. Poi autorizza il tuo UID in Firestore come spiegato nel README.</p>
+        <p class="small hidden" id="uidBox">Il tuo UID: <strong id="uidValue"></strong></p>
+      </div>
+      <div class="admin-actions">
+        <button class="button primary" id="loginBtn">Accedi con Google</button>
+        <button class="button ghost hidden" id="logoutBtn">Esci</button>
+      </div>
+    </section>
+
+    <section id="adminContent" class="admin-grid hidden">
+      <form id="giftForm" class="panel form-card">
+        <input type="hidden" id="giftId" />
+
+        <div class="form-title">
+          <div>
+            <p class="eyebrow">Nuovo oggetto</p>
+            <h2 id="formHeading">Aggiungi regalo</h2>
+          </div>
+          <button class="button ghost small-button" type="button" id="resetForm">Pulisci</button>
+        </div>
+
+        <label>
+          Nome regalo *
+          <input id="name" required maxlength="120" placeholder="Es. Passeggino leggero" />
+        </label>
+
+        <label>
+          Categoria *
+          <select id="category" required>
+            <option value="passeggio">Passeggio</option>
+            <option value="cameretta">Cameretta</option>
+            <option value="bagnetto">Bagnetto</option>
+            <option value="abbigliamento">Abbigliamento</option>
+            <option value="pappa">Pappa</option>
+            <option value="giochi">Giochi</option>
+            <option value="altro">Altro</option>
+          </select>
+        </label>
+
+        <div class="two-cols">
+          <label>
+            Prezzo
+            <input id="price" maxlength="40" placeholder="Es. €49,90" />
+          </label>
+          <label>
+            Priorità
+            <input id="priority" type="number" min="1" max="999" value="100" />
+          </label>
+        </div>
+
+        <label>
+          Negozio
+          <input id="shop" maxlength="80" placeholder="Es. Amazon, Prenatal, Chicco..." />
+        </label>
+
+        <label>
+          Link acquisto *
+          <input id="link" required type="url" placeholder="https://..." />
+        </label>
+
+        <label>
+          Link immagine
+          <input id="image" type="url" placeholder="https://..." />
+        </label>
+
+        <label>
+          Descrizione
+          <textarea id="description" maxlength="500" placeholder="Descrivi brevemente il regalo"></textarea>
+        </label>
+
+        <label>
+          Stato
+          <select id="status">
+            <option value="available">Disponibile</option>
+            <option value="reserved">Prenotato</option>
+          </select>
+        </label>
+
+        <button class="button primary" type="submit" id="saveGift">Salva regalo</button>
+      </form>
+
+      <section class="panel list-panel">
+        <div class="form-title">
+          <div>
+            <p class="eyebrow">Database</p>
+            <h2>Regali inseriti</h2>
+          </div>
+          <button class="button ghost small-button" id="seedBtn" type="button">Carica esempi</button>
+        </div>
+        <div id="adminList" class="admin-list"></div>
+      </section>
+    </section>
+  </main>
+
+  <div id="toast" class="toast hidden" role="status"></div>
+
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lista Nascita</title>
+  <meta name="description" content="Lista nascita con database online, regali prenotabili e link esterni." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <nav class="nav">
+      <a class="brand" href="./">Lista Nascita</a>
+      <div class="nav-links">
+        <a href="#regali">Regali</a>
+        <a href="admin.html">Admin</a>
+      </div>
+    </nav>
+
+    <section class="hero-content">
+      <p class="eyebrow">Benvenuti</p>
+      <h1 id="siteTitle">Aspettando il nostro piccolo amore</h1>
+      <p id="siteIntro">
+        Scegliete un regalo dalla lista, aprite il link del negozio e prenotatelo per evitare doppioni.
+      </p>
+      <div class="hero-actions">
+        <a class="button primary" href="#regali">Vedi la lista</a>
+        <a class="button ghost" id="whatsappGeneral" target="_blank" rel="noopener">Scrivici</a>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section class="steps">
+      <article>
+        <span>1</span>
+        <h2>Scegli</h2>
+        <p>Trova il regalo che preferisci tra quelli disponibili.</p>
+      </article>
+      <article>
+        <span>2</span>
+        <h2>Apri il link</h2>
+        <p>Vai al negozio esterno, Amazon o qualsiasi altro sito.</p>
+      </article>
+      <article>
+        <span>3</span>
+        <h2>Prenota</h2>
+        <p>Lascia il tuo nome: il regalo viene segnato come prenotato nel database.</p>
+      </article>
+    </section>
+
+    <section id="regali" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Regali</p>
+          <h2>La nostra lista nascita</h2>
+        </div>
+        <div class="filters" id="filters"></div>
+      </div>
+
+      <div id="setupWarning" class="alert hidden">
+        Configura Firebase nel file <strong>firebase-config.js</strong> per collegare il database.
+      </div>
+
+      <div id="loading" class="loading">Caricamento regali...</div>
+      <div id="giftGrid" class="gift-grid"></div>
+      <div id="emptyState" class="empty hidden">
+        <h3>Nessun regalo ancora inserito</h3>
+        <p>Apri la pagina admin per aggiungere il primo oggetto alla lista.</p>
+        <a class="button primary" href="admin.html">Vai ad Admin</a>
+      </div>
+    </section>
+
+    <section class="note">
+      <h2>Come funziona</h2>
+      <p>
+        La lista è collegata a un database online. Quando un regalo viene prenotato,
+        lo stato cambia per tutti in tempo reale.
+      </p>
+    </section>
+  </main>
+
+  <dialog id="reserveDialog" class="dialog">
+    <form id="reserveForm" method="dialog">
+      <button class="dialog-close" type="button" id="closeReserveDialog" aria-label="Chiudi">×</button>
+      <p class="eyebrow">Prenotazione</p>
+      <h2 id="reserveGiftName">Prenota regalo</h2>
+
+      <label>
+        Il tuo nome *
+        <input id="reservedBy" name="reservedBy" required maxlength="80" placeholder="Es. Maria Rossi" />
+      </label>
+
+      <label>
+        Telefono o email, opzionale
+        <input id="reservedContact" name="reservedContact" maxlength="120" placeholder="Es. 333 1234567" />
+      </label>
+
+      <label>
+        Messaggio, opzionale
+        <textarea id="reservedMessage" name="reservedMessage" maxlength="300" placeholder="Aggiungi una nota"></textarea>
+      </label>
+
+      <div class="dialog-actions">
+        <button class="button ghost" type="button" id="cancelReserve">Annulla</button>
+        <button class="button primary" type="submit">Conferma prenotazione</button>
+      </div>
+
+      <p class="small">
+        Dopo la prenotazione, il regalo risulterà occupato nella lista pubblica.
+      </p>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast hidden" role="status"></div>
+
+  <footer class="footer">
+    <p>Con amore, <span id="familyName">la nostra famiglia</span> ❤️</p>
+  </footer>
+
+  <script type="module" src="public.js"></script>
+</body>
+</html>

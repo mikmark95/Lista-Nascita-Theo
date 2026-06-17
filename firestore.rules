@@ -1,0 +1,43 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function isPublicReservation() {
+      let changed = request.resource.data.diff(resource.data).affectedKeys();
+
+      return resource.data.status == "available"
+        && changed.hasOnly([
+          "status",
+          "reservedBy",
+          "reservedContact",
+          "reservedMessage",
+          "reservedAt",
+          "updatedAt"
+        ])
+        && request.resource.data.status == "reserved"
+        && request.resource.data.reservedBy is string
+        && request.resource.data.reservedBy.size() >= 2
+        && request.resource.data.reservedBy.size() <= 80
+        && (!("reservedContact" in request.resource.data) || request.resource.data.reservedContact is string)
+        && (!("reservedMessage" in request.resource.data) || request.resource.data.reservedMessage is string);
+    }
+
+    match /gifts/{giftId} {
+      allow read: if true;
+      allow create, delete: if isAdmin();
+      allow update: if isAdmin() || isPublicReservation();
+    }
+
+    // Crea manualmente un documento con ID uguale al tuo UID:
+    // admins/TUO_UID
+    match /admins/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+    }
+  }
+}
