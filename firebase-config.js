@@ -18,7 +18,7 @@ export const siteSettings = {
   intro: "Scegliete un regalo dalla lista, aprite il link del negozio e prenotatelo per evitare doppioni.",
   familyName: "Nicoleta e Michele",
   // Numero con prefisso internazionale, senza + e senza spazi. Esempio: 393331234567
-  whatsappNumber: "393927571480"
+  whatsappNumber: "393921847172"
 };
 
 export function isFirebaseConfigured() {
