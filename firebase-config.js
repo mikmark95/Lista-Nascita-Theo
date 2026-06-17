@@ -3,7 +3,7 @@
 // 3) Copia qui la configurazione che Firebase ti mostra.
 // La configurazione Firebase non è una password: la sicurezza vera sta nelle regole Firestore.
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyDxJ33z3PungAedogFX1mk5-hxQk3fjADw",
   authDomain: "lista-nascita-theo.firebaseapp.com",
   projectId: "lista-nascita-theo",
